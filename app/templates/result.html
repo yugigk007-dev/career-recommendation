@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Career Results</title>
+</head>
+<body>
+
+<h2>🎯 Your Career Recommendations</h2>
+
+{% if jobs %}
+    <ul>
+        {% for job in jobs %}
+            <li>
+                <h3>{{ job.title }}</h3>
+
+                {% if job.required_skills %}
+                    <strong>Required Skills:</strong>
+                    <ul>
+                        {% for skill in job.required_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>❌ No matching careers found.</p>
+    <p>Try selecting different options in the quiz.</p>
+{% endif %}
+
+<br>
+
+<a href="/">🔁 Take Quiz Again</a>
+
+</body>
+</html>
