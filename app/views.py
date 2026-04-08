@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Question, Choice, Job
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 def quiz(request):
     questions = Question.objects.all()
@@ -31,3 +33,9 @@ def match_jobs(user_skills):
     scored_jobs.sort(key=lambda x: x[1], reverse=True)
 
     return [job for job, score in scored_jobs if score > 0]
+
+
+def create_admin(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@gmail.com', 'admin123')
+    return HttpResponse("Admin created")
